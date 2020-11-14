@@ -26,7 +26,7 @@
 					<tr>
 						<td><b>Nome do Filme</b></td>
 						<td><b>Realizadores</b></td>
-						<td><b>Protagonista</b></td>
+						<td><b>Protagonistas</b></td>
 						<td><b>Ano de Lançamento</b></td>
 					</tr>
 				</thead>
@@ -41,21 +41,21 @@
 					</tr>
 				</tbody>
 			</table>
-			
-			<div class="row"> 
-			<form method="post">
-				<input type="submit" value="Criar Powerpoint" style="margin:2px" />
-			</form>
-			<button type="button" style="margin:2px"
-				onclick="location.href='index';">Voltar</button>
-		</div>
-		
+
+			<div class="row">
+				<form method="post">
+					<input type="submit" value="Criar Powerpoint" style="margin: 2px" />
+				</form>
+				<button type="button" style="margin: 2px"
+					onclick="location.href='index';">Voltar</button>
+			</div>
+
 		</div>
 
 		<div th:if="${#lists.isEmpty(moviesList)}">
 			<p>O texto pesquisado não apresenta resultados.</p>
-			
-			<button type="button" style="margin:2px"
+
+			<button type="button" style="margin: 2px"
 				onclick="location.href='index';">Voltar</button>
 		</div>
 	</div>

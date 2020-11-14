@@ -9,17 +9,21 @@ import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import org.apache.commons.text.WordUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import application.entity.Movie;
 
 public class MovieInfoCompilation{
-
+	
 	//lista unica com os filmes de todas as fontes
 	List<Movie> movieListCompilation;
 
@@ -27,14 +31,17 @@ public class MovieInfoCompilation{
 	private final String TMDB_API_URL = "http://api.themoviedb.org/";
 	private final String TMDB_API_KEY = "b8837d02522fd74d2a462226eb912eaf";
 
+	//credenciais API omdb
+	private final String OMDB_API_URL= "http://www.omdbapi.com/";
+	private final String OMDB_API_KEY = "d14484e4";
+
 	public MovieInfoCompilation (String name) throws IOException  {
-
-		List<Movie> moviesList = new ArrayList<Movie>();
-		moviesList.addAll(tmdbMovieList(name));
+		
+		List<Movie> moviesList = new ArrayList<Movie>(tmdbMovieList(name));
 		moviesList.addAll(mockMovieList(name));
-		moviesList.addAll(mockMovieList2(name));
-
-		movieListCompilation = new ArrayList<Movie>();
+		
+		moviesList.addAll(omdbMovieList(moviesList));
+		
 		movieListCompilation = movieListCompilation(moviesList);
 	}
 
@@ -45,7 +52,7 @@ public class MovieInfoCompilation{
 	 * @return
 	 * @throws IOException
 	 */
-	private List<Movie> tmdbMovieList (String name) throws IOException {
+	public List<Movie> tmdbMovieList (String name) throws IOException {
 
 		List <Movie> movList = new ArrayList <Movie>();
 
@@ -122,71 +129,115 @@ public class MovieInfoCompilation{
 	}
 
 	/**
-	 * mock de lista de filmes 
-	 * @param name
+	 * retorna uma lista de filmes obtida a partir da API da OMDB, 
+	 * utilizando os nomes da lista de filmes recebida 
+	 * @param movieList
 	 * @return
+	 * @throws IOException
 	 */
-	private List<Movie> mockMovieList(String name) {
+	public List<Movie> omdbMovieList (List<Movie> movieList) throws IOException {
 
-		List<Movie> moviesList = new ArrayList<Movie>();
+		//Set para não ter nomes de filmes duplicados
+		Set<String> movieNameList = new HashSet<String>();
 
-		List<String> protagonists1 = new ArrayList<String>();
-		protagonists1.add("Leonardo Dicaprio");
-		protagonists1.add("Kate Winslet");
+		//adiciona todos os nomes de filmes ao Set
+		for (Movie m : movieList) {
+			movieNameList.add(m.getName().replaceAll(" ", "+").toLowerCase());
+		}
 
-		List<String> directors1 = new ArrayList<String>();
-		directors1.add("James Cameron");
+		//lista de filmes a ser retornada
+		List <Movie> movListFinal = new ArrayList <Movie>();
 
-		List<String> protagonists2 = new ArrayList<String>();
-		protagonists2.add("Britney Spears");
+		//para cada nome do Set, é feito um pedido JSON à API da OMDB
+		for (String name : movieNameList) {
+			URL url = new URL(OMDB_API_URL + "?t=" + name + "&apikey=" + OMDB_API_KEY);
+			System.out.println(url);
 
-		List<String> directors2 = new ArrayList<String>();
-		directors2.add("Tamra Davis");
+			HttpURLConnection con = (HttpURLConnection) url.openConnection();
+			con.setDoOutput(true);
+			con.setRequestMethod("GET");
+			con.setRequestProperty("Content-Type", "application/json");
+			int status = con.getResponseCode();
+			StringBuilder sb = new StringBuilder();
 
-		Movie movie1 = new Movie ("Titanic",directors1, protagonists1, 1997) ;
-		Movie movie2 = new Movie ("Crossroads",directors2, protagonists2, 2002) ;
+			switch (status) {
+			case 200:
+			case 201:
+				BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+				String line;
+				while ((line = br.readLine()) != null) {
+					sb.append(line+"\n");
+				}
+				br.close();
+			}
 
-		moviesList.add(movie1);
-		moviesList.add(movie2);
+			//obtenção da resposta JSON 
+			String jsonString = sb.toString();
+			JSONObject obj = new JSONObject(jsonString);
 
-		return moviesList;
+			//se não houver resultados na resposta, retorna lista vazia
+			if ("False".equals(obj.getString("Response"))) {
+				return movListFinal;
+			}
+			else 
+			{
+				//preenche campos do filme a adicionar à lista 'movListFinal'
+				Movie mov = new Movie();
+				if (obj.has("Title")) {
+					mov.setName(obj.getString("Title"));
+				}
+				if (obj.has("Year")) {
+					mov.setReleaseYear(Integer.parseInt(obj.getString("Year")));
+				}
+				if (obj.has("Director")) {
+					mov.setDirectors(new ArrayList<String>(Arrays.asList(obj.getString("Director").split(", "))));
+				}
 
+				if (obj.has("Actors")) {
+					mov.setProtagonists(new ArrayList<String>(Arrays.asList(obj.getString("Actors").split(", "))));
+				}
+				movListFinal.add(mov);
+			}
+		}
+
+		return movListFinal;
 	}
 
 
 	/**
-	 * mock de lista de filmes
+	 * mock de lista de filmes 
 	 * @param name
 	 * @return
 	 */
-	private List<Movie> mockMovieList2(String name) {
+	public List<Movie> mockMovieList(String name) {
 
 		List<Movie> moviesList = new ArrayList<Movie>();
+		List<String> newList = new ArrayList<String>();
 
-		List<String> protagonists1 = new ArrayList<String>();
-		protagonists1.add("Leonardo Dicaprio");
-		protagonists1.add("Kate Winslet");
+		if ("angelina+jolie".equals(name)) {
+			moviesList.add(new Movie ("By The Sea",newList,newList,0));
+			moviesList.add(new Movie ("Maleficent",newList,newList,0));
+			moviesList.add(new Movie ("Lara Croft: Tomb Raider",newList,newList,0));
+		}
 
-		List<String> directors1 = new ArrayList<String>();
-		directors1.add("James Cameron");
-		directors1.add("cenas");
+		if ("britney+spears".equals(name)) {
+			Movie mov = new Movie();
+			mov.setName("Crossroads");
+			List<String> protagonists = new ArrayList<String>();
+			protagonists.add("Britney Spears");
+			List<String> directors = new ArrayList<String>();
+			directors.add("Tamra Davis");
+			mov.setDirectors(directors);
+			mov.setProtagonists(protagonists);
+			mov.setReleaseYear(2002);
 
-		List<String> protagonists2 = new ArrayList<String>();
-		protagonists2.add("Britney Spears");
-		protagonists2.add("cenas");
-
-		List<String> directors2 = new ArrayList<String>();
-		directors2.add("Tamra Davis");
-
-		Movie movie1 = new Movie ("Titanic",directors1, protagonists1, 1997) ;
-		Movie movie2 = new Movie ("Crossroads",directors2, protagonists2, 2002) ;
-
-		moviesList.add(movie1);
-		moviesList.add(movie2);
+			moviesList.add(mov);
+		}
 
 		return moviesList;
 
 	}
+
 
 	/**
 	 * 
@@ -208,7 +259,7 @@ public class MovieInfoCompilation{
 			//percorre a lista de filmes a ser retornada
 			for (Movie mov2: movListFinal) {
 				//se nome do filme 'mov' já existe na lista 'movListFinal', os seus campos são verificados e, se necessário, atualizados
-				if (mov2.getName().equals(mov.getName())) {
+				if (WordUtils.capitalize(mov2.getName().toLowerCase()).equals(WordUtils.capitalize(mov.getName().toLowerCase()))) {
 
 					//junta, sem duplicados, a lista de protagonistas e realizadores dos dois filmes a ser comparados, e atualiza o filme na lista 'movListFinal'
 					movListFinal.get((movListFinal.lastIndexOf(mov2))).setProtagonists(getListWithUniqueElements(mov.getProtagonists(), mov2.getProtagonists()));
@@ -231,18 +282,24 @@ public class MovieInfoCompilation{
 	}
 
 	/**
-	 * concatena duas listas de Strings, sem duplicados
+	 * concatena duas listas de Strings, sem duplicados. Todas as Strings têm palavras com a primeira letra maiúscula
 	 * @param list
 	 * @param list2
 	 * @return
 	 */
 	private List<String> getListWithUniqueElements (List<String> list, List<String> list2) {
 
+		Set<String> listFinal = new HashSet<String>();
+
 		List<String> lists = new ArrayList<String>(list);
-		lists.removeAll(list2);
+		lists.addAll(list);
 		lists.addAll(list2);
 
-		return lists;
+		for (String elem : lists) {
+			listFinal.add(WordUtils.capitalize(elem.toLowerCase()));
+		}
+
+		return new ArrayList <String> (listFinal);
 	}
 
 	public List<Movie> getMovieListCompilation() {
@@ -252,5 +309,4 @@ public class MovieInfoCompilation{
 	public void setMovieListCompilation(List<Movie> movieListCompilation) {
 		this.movieListCompilation = movieListCompilation;
 	}
-
 }
