@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="utf-8">
+<title>Recomendação de Filmes</title>
+<link rel="stylesheet" type="text/css"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+</head>
+
+<body>
+	<div class="container">
+		<h2>Recomendação de Filmes - Pesquisa</h2>
+
+		<div class="row">
+
+			<div class="col-md-3">
+				<form method="get" th:action="@{/results}" th:object="${movieForm}">
+					<input type="hidden" />
+					<div class="form-group">
+						<label class="control-label" for="actor">Ator</label> <input
+							type="text" class="form-control" th:field="*{actor}" />
+					</div>
+					<input type="submit" />
+
+				</form>
+			</div>
+
+			<div class="col-md-3">
+				<form method="get" th:action="@{/results}" th:object="${movieForm}">
+					<input type="hidden" />
+					<div class="form-group">
+						<label class="control-label" for="director">Realizador</label> <input
+							type="text" class="form-control" th:field="*{director}" />
+					</div>
+					<input type="submit" />
+				</form>
+
+			</div>
+		</div>
+
+	</div>
+</body>
+
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="utf-8">
+<title>Lista de Resultados</title>
+<link rel="stylesheet" type="text/css"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+</head>
+
+<body>
+	<div class="container">
+
+		<div class="row">
+			<h2 th:text="${role}"></h2>
+			&nbsp;
+			<h2 th:text="${name}"></h2>
+			<h2>&nbsp;- Lista de Filmes</h2>
+
+		</div>
+
+		<div class="movielist" th:unless="${#lists.isEmpty(moviesList)}">
+
+			<table class="table table-striped table-bordered">
+				<thead class="ttop">
+					<tr>
+						<td><b>Nome do Filme</b></td>
+						<td><b>Realizadores</b></td>
+						<td><b>Protagonista</b></td>
+						<td><b>Ano de Lançamento</b></td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="movie: ${moviesList}"
+						th:style="'font-weight: normal;'">
+
+						<td th:text="${movie.name}"></td>
+						<td th:text="${#strings.listJoin(movie.directors, ',')}"></td>
+						<td th:text="${#strings.listJoin(movie.protagonists, ',')}"></td>
+						<td th:text="${movie.releaseYear}"></td>
+					</tr>
+				</tbody>
+			</table>
+			
+			<div class="row"> 
+			<form method="post">
+				<input type="submit" value="Criar Powerpoint" style="margin:2px" />
+			</form>
+			<button type="button" style="margin:2px"
+				onclick="location.href='index';">Voltar</button>
+		</div>
+		
+		</div>
+
+		<div th:if="${#lists.isEmpty(moviesList)}">
+			<p>O texto pesquisado não apresenta resultados.</p>
+			
+			<button type="button" style="margin:2px"
+				onclick="location.href='index';">Voltar</button>
+		</div>
+	</div>
+</body>
+
+</html>
