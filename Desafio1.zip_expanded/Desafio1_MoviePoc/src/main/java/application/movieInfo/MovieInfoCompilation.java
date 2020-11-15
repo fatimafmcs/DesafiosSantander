@@ -20,7 +20,7 @@ import org.apache.commons.text.WordUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import application.entity.Movie;
+import application.model.Movie;
 
 public class MovieInfoCompilation{
 	
@@ -220,18 +220,11 @@ public class MovieInfoCompilation{
 			moviesList.add(new Movie ("Lara Croft: Tomb Raider",newList,newList,0));
 		}
 
-		if ("britney+spears".equals(name)) {
-			Movie mov = new Movie();
-			mov.setName("Crossroads");
-			List<String> protagonists = new ArrayList<String>();
-			protagonists.add("Britney Spears");
-			List<String> directors = new ArrayList<String>();
-			directors.add("Tamra Davis");
-			mov.setDirectors(directors);
-			mov.setProtagonists(protagonists);
-			mov.setReleaseYear(2002);
-
-			moviesList.add(mov);
+		if ("tom+cruise".equals(name)) {
+			moviesList.add(new Movie ("Vanilla Sky",newList,newList,0));
+			moviesList.add(new Movie ("Valkyrie",newList,newList,0));
+			moviesList.add(new Movie ("Jerry Maguire",newList,newList,0));
+			moviesList.add(new Movie ("Mission: Impossible II",newList,newList,0));
 		}
 
 		return moviesList;

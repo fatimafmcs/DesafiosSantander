@@ -1,4 +1,4 @@
-package application.form;
+package application.model;
 
 public class MovieForm {
  

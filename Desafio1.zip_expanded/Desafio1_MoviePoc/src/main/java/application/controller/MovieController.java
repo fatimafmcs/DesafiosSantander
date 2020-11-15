@@ -24,8 +24,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import application.entity.Movie;
-import application.form.MovieForm;
+import application.model.Movie;
+import application.model.MovieForm;
 import application.movieInfo.MovieInfoCompilation;
 
 @Controller
@@ -160,7 +160,7 @@ public class MovieController {
 		}
 
 		//cria o ficheiro powerpoint, localizado na mesma pasta que o pom.xml
-		File file=new File("MoviesPresentation.pptx");
+		File file=new File("Movies Presentation " + name + ".pptx");
 		FileOutputStream out = new FileOutputStream(file);
 
 		ppt.write(out);
