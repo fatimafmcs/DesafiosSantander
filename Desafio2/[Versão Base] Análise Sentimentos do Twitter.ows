@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='utf-8'?>
+<scheme description="" title="" version="2.0">
+	<nodes>
+		<node id="0" name="Twitter" position="(57.0, 158.0)" project_name="Orange3-Text" qualified_name="orangecontrib.text.widgets.owtwitter.OWTwitter" title="(1) Twitter" version="" />
+		<node id="1" name="Preprocess Text" position="(171.0, 158.0)" project_name="Orange3-Text" qualified_name="orangecontrib.text.widgets.owpreprocess.OWPreprocess" title="(2) Preprocess Text" version="" />
+		<node id="2" name="Word Cloud" position="(350.0, 85.0)" project_name="Orange3-Text" qualified_name="orangecontrib.text.widgets.owwordcloud.OWWordCloud" title="(3) Word Cloud" version="" />
+		<node id="3" name="Sentiment Analysis" position="(347.0, 182.0)" project_name="Orange3-Text" qualified_name="orangecontrib.text.widgets.owsentimentanalysis.OWSentimentAnalysis" title="(4) Sentiment Analysis VADER" version="" />
+		<node id="4" name="Data Table" position="(522.0, 183.0)" project_name="Orange3" qualified_name="Orange.widgets.data.owtable.OWDataTable" title="(5) Data Table" version="" />
+		<node id="5" name="Save Data" position="(702.0, 183.0)" project_name="Orange3" qualified_name="Orange.widgets.data.owsave.OWSave" title="(6) Save Data" version="" />
+		<node id="6" name="Sentiment Analysis" position="(349.0, 302.0)" project_name="Orange3-Text" qualified_name="orangecontrib.text.widgets.owsentimentanalysis.OWSentimentAnalysis" title="(7) Sentiment Analysis Multilingual" version="" />
+		<node id="7" name="Data Table" position="(527.0, 302.0)" project_name="Orange3" qualified_name="Orange.widgets.data.owtable.OWDataTable" title="(8) Data Table" version="" />
+		<node id="8" name="Save Data" position="(700.0, 302.0)" project_name="Orange3" qualified_name="Orange.widgets.data.owsave.OWSave" title="(9) Save Data" version="" />
+	</nodes>
+	<links>
+		<link enabled="true" id="0" sink_channel="Corpus" sink_node_id="1" source_channel="Corpus" source_node_id="0" />
+		<link enabled="true" id="1" sink_channel="Corpus" sink_node_id="2" source_channel="Corpus" source_node_id="1" />
+		<link enabled="true" id="2" sink_channel="Corpus" sink_node_id="3" source_channel="Corpus" source_node_id="1" />
+		<link enabled="true" id="3" sink_channel="Data" sink_node_id="4" source_channel="Corpus" source_node_id="3" />
+		<link enabled="true" id="4" sink_channel="Data" sink_node_id="5" source_channel="Selected Data" source_node_id="4" />
+		<link enabled="true" id="5" sink_channel="Corpus" sink_node_id="6" source_channel="Corpus" source_node_id="1" />
+		<link enabled="true" id="6" sink_channel="Data" sink_node_id="8" source_channel="Selected Data" source_node_id="7" />
+		<link enabled="true" id="7" sink_channel="Data" sink_node_id="7" source_channel="Corpus" source_node_id="6" />
+	</links>
+	<annotations />
+	<thumbnail />
+	<node_properties>
+		<properties format="literal" node_id="0">{'allow_retweets': False, 'collecting': False, 'controlAreaVisible': True, 'language': 'en', 'limited_search': True, 'max_tweets': 1000, 'mode': 0, 'savedWidgetGeometry': b'\x01\xd9\xd0\xcb\x00\x03\x00\x00\x00\x00\x01\x07\x00\x00\x00\xb4\x00\x00\x02u\x00\x00\x02\x8b\x00\x00\x01\x08\x00\x00\x00\xd3\x00\x00\x02t\x00\x00\x02\x8a\x00\x00\x00\x00\x00\x00\x00\x00\x05V\x00\x00\x01\x08\x00\x00\x00\xd3\x00\x00\x02t\x00\x00\x02\x8a', 'text_includes': ['Content'], 'word_list': ['joe biden'], '__version__': 1}</properties>
+		<properties format="pickle" node_id="1">gASVuAMAAAAAAAB9lCiMCmF1dG9jb21taXSUiIwSY29udHJvbEFyZWFWaXNpYmxllIiME3NhdmVk
+V2lkZ2V0R2VvbWV0cnmUQ0IB2dDLAAMAAAAAAj4AAACqAAAE7QAAAsMAAAI/AAAAyQAABOwAAALC
+AAAAAAAAAAAFVgAAAj8AAADJAAAE7AAAAsKUjA5zdG9yZWRzZXR0aW5nc5R9lCiMBG5hbWWUjACU
+jA1wcmVwcm9jZXNzb3JzlF2UKIwUcHJlcHJvY2Vzcy50cmFuc2Zvcm2UfZSMB21ldGhvZHOUXZQo
+SwBLAWVzhpSME3ByZXByb2Nlc3MudG9rZW5pemWUfZQojAZtZXRob2SUSwOMB3BhdHRlcm6UjANc
+dyuUdYaUjBFwcmVwcm9jZXNzLmZpbHRlcpR9lCiMA2VuZJRHP+zMzMzMzM2MC2ludmFsaWRhdGVk
+lEc/7Feze0Pr+YwIbGFuZ3VhZ2WUjAdFbmdsaXNolIwHbHhfbGlzdJRdlIwHbHhfcGF0aJROjAdt
+ZXRob2RzlF2USwBhjAhuX3Rva2Vuc5RLZIwHcGF0dGVybpRoCIwFc3RhcnSURz+5mZmZmZmajAdz
+d19saXN0lF2UKIweb3Jhbmdld2lkZ2V0LnV0aWxzLmZpbGVkaWFsb2dzlIwKUmVjZW50UGF0aJST
+lCmBlH2UKIwHYWJzcGF0aJSMTUM6L1VzZXJzL0bDoXRpbWEgU2FudG9zL0Rlc2t0b3AvZGVzYWZp
+b3Mgc2FudGFuZGVyL0Rlc2FmaW8gMi9zdG9wd29yZHNfZW4udHh0lIwGcHJlZml4lIwHYmFzZWRp
+cpSMB3JlbHBhdGiUjBBzdG9wd29yZHNfZW4udHh0lIwFdGl0bGWUaAiMBXNoZWV0lGgIjAtmaWxl
+X2Zvcm1hdJROdWJoKCmBlH2UKGgrjEpDOi9Vc2Vycy9Gw6F0aW1hIFNhbnRvcy9EZXNrdG9wL2Rl
+c2FmaW9zIHNhbnRhbmRlci9EZXNhZmlvIDIvc3RvcHdvcmRzLnR4dJRoLU5oL05oMWgIaDJoCGgz
+TnViZYwHc3dfcGF0aJRoKCmBlH2UKGgrjE1DOi9Vc2Vycy9Gw6F0aW1hIFNhbnRvcy9EZXNrdG9w
+L2Rlc2FmaW9zIHNhbnRhbmRlci9EZXNhZmlvIDIvc3RvcHdvcmRzX2VuLnR4dJRoLWguaC+MEHN0
+b3B3b3Jkc19lbi50eHSUaDFoCGgyaAhoM051YnWGlGV1jAtfX3ZlcnNpb25fX5RLAnUu
+</properties>
+		<properties format="pickle" node_id="2">gASVwQAAAAAAAAB9lCiMEmNvbnRyb2xBcmVhVmlzaWJsZZSIjBNzYXZlZFdpZGdldEdlb21ldHJ5
+lENCAdnQywADAAAAAAAAAAAAFwAABVUAAALXAAAAAAAAABcAAAVVAAAC1wAAAAACAAAABVYAAAAA
+AAAAFwAABVUAAALXlIwOc2VsZWN0ZWRfd29yZHOUj5QojAVhaW5kYZSQjAt3b3Jkc19jb2xvcpSI
+jAp3b3Jkc190aWx0lEsBjAtfX3ZlcnNpb25fX5RLAXUu
+</properties>
+		<properties format="literal" node_id="3">{'autocommit': True, 'controlAreaVisible': True, 'liu_language': 'English', 'method_idx': 1, 'multi_language': 'Portuguese', 'savedWidgetGeometry': b'\x01\xd9\xd0\xcb\x00\x03\x00\x00\x00\x00\x03\xcf\x00\x00\x01\t\x00\x00\x05\x0f\x00\x00\x01\xe1\x00\x00\x03\xd0\x00\x00\x01(\x00\x00\x05\x0e\x00\x00\x01\xe0\x00\x00\x00\x00\x00\x00\x00\x00\x05V\x00\x00\x03\xd0\x00\x00\x01(\x00\x00\x05\x0e\x00\x00\x01\xe0', '__version__': 1}</properties>
+		<properties format="literal" node_id="4">{'auto_commit': True, 'color_by_class': True, 'controlAreaVisible': True, 'dist_color_RGB': (220, 220, 220, 255), 'savedWidgetGeometry': b'\x01\xd9\xd0\xcb\x00\x03\x00\x00\x00\x00\x00\x00\x00\x00\x00\x17\x00\x00\x05U\x00\x00\x02\xd7\x00\x00\x00\x00\x00\x00\x00\x17\x00\x00\x05U\x00\x00\x02\xd7\x00\x00\x00\x00\x02\x00\x00\x00\x05V\x00\x00\x00\x00\x00\x00\x00\x17\x00\x00\x05U\x00\x00\x02\xd7', 'select_rows': True, 'selected_cols': [], 'selected_rows': [], 'show_attribute_labels': True, 'show_distributions': False, '__version__': 1}</properties>
+		<properties format="literal" node_id="5">{'add_type_annotations': True, 'auto_save': True, 'controlAreaVisible': True, 'filter': 'Comma-separated values (*.csv)', 'savedWidgetGeometry': b'\x01\xd9\xd0\xcb\x00\x03\x00\x00\x00\x00\x02D\x00\x00\x01\x13\x00\x00\x03f\x00\x00\x01\xa6\x00\x00\x02E\x00\x00\x012\x00\x00\x03e\x00\x00\x01\xa5\x00\x00\x00\x00\x00\x00\x00\x00\x05V\x00\x00\x02E\x00\x00\x012\x00\x00\x03e\x00\x00\x01\xa5', 'stored_name': 'sentiments analysis VADER.csv', 'stored_path': 'C:\\Users\\Fátima Santos\\Desktop\\desafios santander\\Desafio 2', '__version__': 2}</properties>
+		<properties format="literal" node_id="6">{'autocommit': True, 'controlAreaVisible': True, 'liu_language': 'English', 'method_idx': 2, 'multi_language': 'Portuguese', 'savedWidgetGeometry': b'\x01\xd9\xd0\xcb\x00\x03\x00\x00\x00\x00\x01\xf9\x00\x00\x01\xd2\x00\x00\x039\x00\x00\x02\xaa\x00\x00\x01\xfa\x00\x00\x01\xf1\x00\x00\x038\x00\x00\x02\xa9\x00\x00\x00\x00\x00\x00\x00\x00\x05V\x00\x00\x01\xfa\x00\x00\x01\xf1\x00\x00\x038\x00\x00\x02\xa9', '__version__': 1}</properties>
+		<properties format="literal" node_id="7">{'auto_commit': True, 'color_by_class': True, 'controlAreaVisible': True, 'dist_color_RGB': (220, 220, 220, 255), 'savedWidgetGeometry': b'\x01\xd9\xd0\xcb\x00\x03\x00\x00\x00\x00\x00\x00\x00\x00\x00\x17\x00\x00\x05U\x00\x00\x02\xd7\x00\x00\x00\x00\x00\x00\x00\x17\x00\x00\x05U\x00\x00\x02\xd7\x00\x00\x00\x00\x02\x00\x00\x00\x05V\x00\x00\x00\x00\x00\x00\x00\x17\x00\x00\x05U\x00\x00\x02\xd7', 'select_rows': True, 'selected_cols': [], 'selected_rows': [], 'show_attribute_labels': True, 'show_distributions': False, '__version__': 1}</properties>
+		<properties format="literal" node_id="8">{'add_type_annotations': True, 'auto_save': True, 'controlAreaVisible': True, 'filter': 'Microsoft Excel spreadsheet (*.xlsx)', 'savedWidgetGeometry': b'\x01\xd9\xd0\xcb\x00\x03\x00\x00\x00\x00\x02D\x00\x00\x01\x13\x00\x00\x03\x90\x00\x00\x01\xa6\x00\x00\x02E\x00\x00\x012\x00\x00\x03\x8f\x00\x00\x01\xa5\x00\x00\x00\x00\x00\x00\x00\x00\x05V\x00\x00\x02E\x00\x00\x012\x00\x00\x03\x8f\x00\x00\x01\xa5', 'stored_name': 'sentiments analysis MULTILINGUAL.xlsx', 'stored_path': 'C:\\Users\\Fátima Santos\\Desktop\\desafios santander\\Desafio 2', '__version__': 2}</properties>
+	</node_properties>
+	<session_state>
+		<window_groups />
+	</session_state>
+</scheme>
