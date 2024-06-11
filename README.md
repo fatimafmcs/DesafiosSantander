@@ -2,7 +2,6 @@
 
 ```markdown
 ## Challenge Description
-
 Develop an application that allows users to search for a director or an actor by name.
 The search will gather movie information from various sources and generate
 a list of films featuring the searched director or actor.
@@ -14,9 +13,7 @@ Additionally, the application should provide an option to export this list
 to a PowerPoint presentation with a single click.
 Each slide in the PowerPoint should display the "Movie Name," "Director," and "Release Year."
 
-## Project Structure
-
-### Tools Used
+## Tools Used
 - Eclipse IDE 2020-09
 - Java 8
 - Maven
