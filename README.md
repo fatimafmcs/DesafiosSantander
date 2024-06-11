@@ -3,9 +3,12 @@
 ```markdown
 ## Challenge Description
 
-Create an application where it is possible to search for a director or an actor by name. This search will generate a list of movie data featuring the searched director/actor from various sources that provide information about films. The application should compare the information from different sources and merge it into a single list with the fields "Movie Name," "Director," "Protagonists," and "Release Year."
+Develop an application that allows users to search for a director or an actor by name.
+The search will gather movie information from various sources and generate a list of films featuring the searched director or actor.
+The application should then compare and merge the information from these sources into a single list with the following fields: "Movie Name," "Director," "Protagonists," and "Release Year."
 
-The application should also allow, with a single click/request, to transfer the list to a PowerPoint presentation where each slide presents the "movie name," "director," and "release year."
+Additionally, the application should provide an option to export this list to a PowerPoint presentation with a single click.
+Each slide in the PowerPoint should display the "Movie Name," "Director," and "Release Year."
 
 ## Project Structure
 
