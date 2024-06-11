@@ -9,4 +9,4 @@ Given a set of tweets as input, return a sentiment classification of these tweet
 - Microsoft Excel
 ```
 
-Please read the README pdf file for more details about the implementation, outcome and conclusions.
+## Please read the README pdf file for more details about the implementation, outcome and conclusions.
